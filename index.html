@@ -21,7 +21,7 @@
       font-family: inherit;
     }
     button.learn-more {
-      width: 12rem;
+      width: 14rem;
       height: auto;
       text-align: center;
       overflow: hidden;
@@ -119,18 +119,18 @@
       <img src="./qr.png" style="height: 200px;" />
     </div>
 
-    <model-viewer src="./Astronaut.glb" ar ar-modes="webxr scene-viewer quick-look"
+    <model-viewer src="./edison.glb" ar ar-modes="webxr scene-viewer quick-look"
                   style="width: 100%; height: 100%; max-height: 400px;"
-                  ar-scale="auto" camera-controls alt="A 3D model of an astronaut"
-                  ios-src="./Astronaut.usdz">
-      <div style="display: flex; justify-content: center; margin-top: 1em;">
+                  ar-scale="auto" camera-controls alt="A 3D model of an edison"
+                  ios-src="./edison.usdz">
+      <a href="https://www.fatboy.com/nl-nl/edison-the-petit" style="display: flex; justify-content: center; margin-top: 1em;">
         <button class="learn-more">
           <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
           </span>
-          <a href="https://www.fatboy.com/nl-nl" class="button-text">Buy now</a>
+          <span class="button-text">Meer informatie</span>
         </button>
-      </div>
+      </a>
     </model-viewer>
   </div>
 
@@ -138,7 +138,7 @@
   Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
 
   <!-- Hiermee kan het AR model in Quick look getriggered worden, zonder user interactie. -->
-  <a style="display: none" rel="ar" id="ios-ar" href="./Astronaut.usdz">
+  <a style="display: none" rel="ar" id="ios-ar" href="./edison.usdz">
     <img src="" />
   </a>
 
@@ -173,7 +173,7 @@
     if(triggerArModel) {
       switch(os) {
         case "Android":
-          const modelUrl = new URL('./Astronaut.glb', selfUrl);
+          const modelUrl = new URL('./edison.glb', selfUrl);
           const fallbackUrl = new URL(selfUrl);
           fallbackUrl.search = '?ar-open-failed';
 
