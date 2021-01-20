@@ -23,7 +23,6 @@ Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem
 <h2>Waarom gebruiken we het?</h2>
 Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
 
-<a href="#" id="ar-failed"></a>
 <h2 id="ar-model">AR model</h2>
 
 <div>
@@ -138,13 +137,13 @@ Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken va
 <h2>Waarom gebruiken we het?</h2>
 Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
 
-<a style="display: none" rel="ar" id="ios-ar" href="https://kabisa.github.io/ar-blog-demo/Astronaut.usdz">
+<a style="display: none" rel="ar" id="ios-ar" href="./Astronaut.usdz">
   <img src="" />
 </a>
 
 <script>
   function getMobileOS() {
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
     if (/android/i.test(userAgent)) {
       return "Android";
@@ -157,21 +156,36 @@ Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken va
     return "unknown";
   }
 
-  var os = getMobileOS();
+  const os = getMobileOS();
+  const selfUrl = new URL(window.location.href);
+
+  // Using query params as using location.hash somehow interferes with model-viewer loading
+  // ¯\_(ツ)_/¯
+  const params = new URL(selfUrl).searchParams;
+  const triggerArModel = params.get("open-ar-model") !== null;
+  const arOpenFailed = params.get("ar-open-failed") !== null;
 
   if(os === "unknown") { //desktop
     document.getElementById("qr-desktop").style.display = 'block';
   }
 
-  if(window.location.hash == "#ar-model") {
+  if(triggerArModel) {
     switch(os) {
       case "Android":
-        window.location.href='intent://arvr.google.com/scene-viewer/1.0?file=https://kabisa.github.io/ar-blog-demo/Astronaut.glb&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://kabisa.github.io/ar-blog-demo/#ar-failed;end;';
+        const modelUrl = new URL('./Astronaut.glb', selfUrl);
+        const fallbackUrl = new URL(selfUrl);
+        fallbackUrl.search = '?ar-open-failed';
+
+        window.location.href = "intent://arvr.google.com/scene-viewer/1.0?file=" + modelUrl + "&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=" + fallbackUrl + ";end;";
         break;
       case "iOS":
         document.getElementById('ios-ar').click();
         break;
     }
+  }
+
+  if(arOpenFailed) {
+    document.getElementById('ar-model').scrollIntoView();
   }
 </script>
 </body>
