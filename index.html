@@ -26,7 +26,7 @@
       text-align: center;
       overflow: hidden;
       position: absolute;
-      bottom: 16px;
+      top: 16px;
       background-color: darkgray;
       border-radius: 1.375rem;
     }
@@ -91,10 +91,69 @@
     button:hover .button-text {
       color: #fff;
     }
+    .slider {
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+      position: absolute;
+      bottom: 16px;
+    }
+
+    .slides {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+      margin-right: 10px;
+      border-radius: 10px;
+      border: none;
+      display: flex;
+    }
+
+    .slide.selected {
+      border: 2px solid #4285f4;
+    }
+
+    .slide:focus {
+      outline: none;
+    }
+
+    .slide:focus-visible {
+      outline: 1px solid #4285f4;
+    }
   </style>
 
   <script type="module" src="./model-viewer.min.js"></script>
   <script nomodule src="./model-viewer-legacy.js"></script>
+  <script type="module">
+    const modelViewer = document.querySelector("model-viewer");
+
+    window.switchSrc = (element, name) => {
+      const base = "./" + name;
+      modelViewer.src = base + '.glb';
+      modelViewer.poster = base + '.png';
+      const slides = document.querySelectorAll(".slide");
+      slides.forEach((element) => {element.classList.remove("selected");});
+      element.classList.add("selected");
+    };
+
+    document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+      // Keep slider interactions from affecting the XR scene.
+      ev.preventDefault();
+    });
+  </script>
 </head>
 <body>
   <h2>Wat is Lorem Ipsum?</h2>
@@ -119,11 +178,11 @@
       <img src="./qr.png" style="height: 200px;" />
     </div>
 
-    <model-viewer src="./edison.glb" ar ar-modes="webxr scene-viewer quick-look"
-                  style="width: 100%; height: 100%; max-height: 400px;"
-                  ar-scale="auto" camera-controls alt="A 3D model of an edison"
-                  ios-src="./edison.usdz">
-      <a href="https://www.fatboy.com/nl-nl/edison-the-petit" style="display: flex; justify-content: center; margin-top: 1em;">
+    <model-viewer src="./chair.glb" ar ar-modes="webxr scene-viewer quick-look"
+                  style="width: 500px; height: 700px;"
+                  ar-scale="auto" camera-controls alt="A 3D model of an chair"
+                  ios-src="./chair.usdz">
+      <a href="https://www.fatboy.com/nl-nl/chair-the-petit" style="display: flex; justify-content: center; margin-top: 1em;">
         <button class="learn-more">
           <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
@@ -131,6 +190,12 @@
           <span class="button-text">Meer informatie</span>
         </button>
       </a>
+      <div class="slider">
+        <div class="slides">
+          <button class="slide selected" onClick="switchSrc(this, 'chair')" style="background-image: url('./chair.png')"></button>
+          <button class="slide" onClick="switchSrc(this, 'mixer')" style="background-image: url('./mixer.png')"></button>
+        </div>
+      </div>
     </model-viewer>
   </div>
 
@@ -138,7 +203,7 @@
   Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
 
   <!-- Hiermee kan het AR model in Quick look getriggered worden, zonder user interactie. -->
-  <a style="display: none" rel="ar" id="ios-ar" href="./edison.usdz">
+  <a style="display: none" rel="ar" id="ios-ar" href="./chair.usdz">
     <img src="" />
   </a>
 
@@ -173,7 +238,7 @@
     if(triggerArModel) {
       switch(os) {
         case "Android":
-          const modelUrl = new URL('./edison.glb', selfUrl);
+          const modelUrl = new URL('./chair.glb', selfUrl);
           const fallbackUrl = new URL(selfUrl);
           fallbackUrl.search = '?ar-open-failed';
 
