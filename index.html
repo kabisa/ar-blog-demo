@@ -179,7 +179,7 @@
     const modelViewer = document.querySelector("model-viewer");
 
     window.switchSrc = (element, name) => {
-      const base = "./" + name;
+      const base = "./assets/" + name;
       modelViewer.src = base + '.glb';
       modelViewer.poster = base + '.png';
       const slides = document.querySelectorAll(".slide");
@@ -216,10 +216,10 @@
       <img src="./qr.png" style="height: 200px;" />
     </div>
 
-    <model-viewer src="./3d/concrete_seat_anthracite.glb" ar ar-modes="webxr scene-viewer quick-look"
+    <model-viewer src="./assets/concrete_seat_anthracite.glb" ar ar-modes="webxr scene-viewer quick-look"
                   style="width: 100%; max-width: 500px; height: 100%; max-height: 700px;"
                   ar-scale="auto" camera-controls alt="A 3D model of an chair"
-                  ios-src="./3d/concrete_seat_anthracite.usdz">
+                  ios-src="./assets/concrete_seat_anthracite.usdz">
       <a href="https://www.fatboy.com/nl-nl/concrete-seat" style="display: flex; justify-content: center; margin-top: 1em;">
         <button class="learn-more">
           <span class="circle" aria-hidden="true">
@@ -233,9 +233,9 @@
       </button>
       <div class="slider">
         <div class="slides">
-          <button class="slide selected" onClick="switchSrc(this, 'concrete_seat_anthracite')" style="background-image: url('./2d/concrete_seat_anthracite.jpeg')"></button>
-          <button class="slide" onClick="switchSrc(this, 'concrete_seat_dijon_yellow')" style="background-image: url('./2d/concrete_seat_dijon_yellow.jpeg')"></button>
-          <button class="slide" onClick="switchSrc(this, 'concrete_seat_light_grey')" style="background-image: url('./2d/concrete_seat_light_grey.jpeg')"></button>
+          <button class="slide selected" onClick="switchSrc(this, 'concrete_seat_anthracite')" style="background-image: url('./assets/concrete_seat_anthracite.png')"></button>
+          <button class="slide" onClick="switchSrc(this, 'concrete_seat_dijon_yellow')" style="background-image: url('./assets/concrete_seat_dijon_yellow.png')"></button>
+          <button class="slide" onClick="switchSrc(this, 'concrete_seat_light_grey')" style="background-image: url('./assets/concrete_seat_light_grey.png')"></button>
         </div>
       </div>
     </model-viewer>
@@ -245,7 +245,7 @@
   Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
 
   <!-- Hiermee kan het AR model in Quick look getriggered worden, zonder user interactie. -->
-  <a style="display: none" rel="ar" id="ios-ar" href="./3d/concrete_seat_anthracite.usdz">
+  <a style="display: none" rel="ar" id="ios-ar" href="assets/concrete_seat_anthracite.usdz">
     <img src="" />
   </a>
 
@@ -280,7 +280,7 @@
     if(triggerArModel) {
       switch(os) {
         case "Android":
-          const modelUrl = new URL('./3d/concrete_seat_anthracite.glb', selfUrl);
+          const modelUrl = new URL('./assets/concrete_seat_anthracite.glb', selfUrl);
           const fallbackUrl = new URL(selfUrl);
           fallbackUrl.search = '?ar-open-failed';
 
