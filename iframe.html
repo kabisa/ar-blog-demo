@@ -6,8 +6,9 @@
 </head>
 <body>
 <model-viewer src="./assets/table_wood.glb" ios-src="./assets/table_wood.usdz" poster="./assets/table_wood.png" shadow-intensity="1" ar ar-modes="webxr scene-viewer quick-look" style="width: 100%; max-width: 500px; height: 100%; max-height: 700px; margin: 0" camera-controls alt="A 3D model carousel">
-  <a href="mailto:blog+veronika-van-heur@kabisa.nl" style="display: flex; justify-content: center; margin-top: 1em;" target="_blank">
-    <img src="./assets/mail.png" alt="mail button" style="width: 60%; border-radius: 4px" />
+  <a class="button mail-button" href="mailto:blog+veronika-van-heur@kabisa.nl" style="display: flex; justify-content: center; margin-top: 1em;" target="_blank">
+    <img style="height: 100%; margin-right: 0.5rem" src="./assets/mail.png" alt="mail"/>
+    Ik wil ook AR op mijn site!
   </a>
   <button slot="ar-button" id="ar-button">
     View in your space
@@ -54,90 +55,39 @@
     display: none;
   }
 
-  /* credits to https://codepen.io/kathykato/pen/rZRaNe */
-  button {
-    position: relative;
+  .mail-button {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    max-width: min-content;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    margin-top: .5em;
+    height: 2rem;
+    width: min-content;
+  }
+
+  .button {
     display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 0;
+    line-height: inherit;
+    white-space: nowrap;
     vertical-align: middle;
-    text-decoration: none;
-    background: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-family: inherit;
-  }
-  button.learn-more {
-    width: 14rem;
-    height: auto;
     text-align: center;
-    overflow: hidden;
-    position: absolute;
-    top: 16px;
-    background-color: darkgray;
-    border-radius: 1.375rem;
-  }
-  button.learn-more .circle {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: relative;
-    display: block;
-    margin: 0;
-    width: 3rem;
-    height: 3rem;
-    background: #282936;
-    border-radius: 1.625rem;
-  }
-  button.learn-more .circle .icon {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background: #fff;
-  }
-  button.learn-more .circle .icon.arrow {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    left: 0.625rem;
-    width: 1.125rem;
-    height: 0.125rem;
-    background: none;
-  }
-  button.learn-more .circle .icon.arrow::before {
-    position: absolute;
-    content: "";
-    top: -0.25rem;
-    right: 0.0625rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-top: 0.125rem solid #fff;
-    border-right: 0.125rem solid #fff;
-    transform: rotate(45deg);
-  }
-  button.learn-more .button-text {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.75rem 0;
-    margin: 0 0 0 1.85rem;
-    color: #282936;
-    font-weight: 700;
-    line-height: 1.6;
-    text-align: center;
+    font-family: rajdhani,sans-serif;
     text-transform: uppercase;
-  }
-  button:hover .circle {
-    width: 100%;
-  }
-  button:hover .circle .icon.arrow {
-    background: #fff;
-    transform: translate(1rem, 0);
-  }
-  button:hover .button-text {
+    font-size: 100%;
+    text-decoration: none;
+    border-radius: .25em;
+    border: 0;
+    outline: 0;
+    background-color: #181e23;
     color: #fff;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .2s cubic-bezier(.55,0,.1,1);
+    transition: -webkit-transform .2s cubic-bezier(.55,0,.1,1);
+    transition: transform .2s cubic-bezier(.55,0,.1,1);
+    transition: transform .2s cubic-bezier(.55,0,.1,1),-webkit-transform .2s cubic-bezier(.55,0,.1,1);
+    weight: 700;
   }
 
   model-viewer {
