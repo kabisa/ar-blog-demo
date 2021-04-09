@@ -182,6 +182,7 @@
     window.switchSrc = (element, name) => {
       const base = "./assets/" + name;
       modelViewer.src = base + '.glb';
+      modelViewer['ios-src'] = base + '.usdz';
       modelViewer.poster = base + '.png';
       const slides = document.querySelectorAll(".slide");
       slides.forEach((element) => {element.classList.remove("selected");});
@@ -198,7 +199,7 @@
   <div>
     <model-viewer src="./assets/concrete_seat_anthracite.glb" ar ar-modes="webxr scene-viewer quick-look"
                   style="width: 100%; max-width: 500px; height: 100%; max-height: 700px; margin: 0 auto;"
-                  ar-scale="auto" ar-placement="floor" camera-controls alt="A 3D model of an chair"
+                  ar-scale="auto" ar-placement="floor" camera-controls alt="A 3D model of a chair"
                   ios-src="./assets/concrete_seat_anthracite.usdz">
       <a href="https://www.fatboy.com/nl-nl/concrete-seat" style="display: flex; justify-content: center; margin-top: 1em;" target="_blank">
         <button class="learn-more">

@@ -35,7 +35,7 @@
   window.switchSrc = (element, name) => {
     const base = "./assets/" + name;
     modelViewer.src = base + '.glb';
-    modelViewer.setAttribute('ios-src', base + '.usdz');
+    modelViewer['ios-src'] = base + '.usdz';
     modelViewer.poster = base + '.png';
     const slides = document.querySelectorAll(".slide");
     slides.forEach((element) => {element.classList.remove("selected");});
