@@ -5,16 +5,18 @@
   <script nomodule src="./model-viewer-legacy.js"></script>
 </head>
 <body>
-<div>HIII</div>
-<model-viewer src="./assets/concrete_seat_anthracite.glb" poster="./assets/concrete_seat_anthracite.png" shadow-intensity="1" ar ar-modes="webxr" style="width: 100%; max-width: 500px; height: 100%; max-height: 700px; margin: 0" camera-controls alt="A 3D model carousel">
-
+<model-viewer src="./assets/concrete_seat_anthracite.glb" ios-src="./assets/concrete_seat_anthracite.usdz" poster="./assets/concrete_seat_anthracite.png" shadow-intensity="1" ar ar-modes="webxr scene-viewer quick-look" style="width: 100%; max-width: 500px; height: 100%; max-height: 700px; margin: 0" camera-controls alt="A 3D model carousel">
+  <a href="https://www.fatboy.com/nl-nl/concrete-seat" style="display: flex; justify-content: center; margin-top: 1em;" target="_blank">
+    <button class="learn-more">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+      <span class="button-text">Product details</span>
+    </button>
+  </a>
   <button slot="ar-button" id="ar-button">
     View in your space
   </button>
-
-  <div id="ar-prompt">
-    <img src="./assets/hand.png">
-  </div>
 
   <div class="slider">
     <div class="slides">
@@ -33,6 +35,7 @@
   window.switchSrc = (element, name) => {
     const base = "./assets/" + name;
     modelViewer.src = base + '.glb';
+    modelViewer.setAttribute('ios-src', base + '.usdz');
     modelViewer.poster = base + '.png';
     const slides = document.querySelectorAll(".slide");
     slides.forEach((element) => {element.classList.remove("selected");});
@@ -58,7 +61,7 @@
   }
 
   #ar-button {
-    background-image: url(./assets/ic_view_in_ar_new_googblue_48dp.png);
+    background-image: url("./ic_view_in_ar_new_googblue_48dp.png");
     background-repeat: no-repeat;
     background-size: 20px 20px;
     background-position: 12px 50%;
