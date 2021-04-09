@@ -1,300 +1,165 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-    body {
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
-
-    /* credits to https://codepen.io/kathykato/pen/rZRaNe */
-    button {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-      outline: none;
-      border: 0;
-      vertical-align: middle;
-      text-decoration: none;
-      background: transparent;
-      padding: 0;
-      font-size: inherit;
-      font-family: inherit;
-    }
-    button.learn-more {
-      width: 14rem;
-      height: auto;
-      text-align: center;
-      overflow: hidden;
-      position: absolute;
-      top: 16px;
-      background-color: darkgray;
-      border-radius: 1.375rem;
-    }
-    button.learn-more .circle {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: relative;
-      display: block;
-      margin: 0;
-      width: 3rem;
-      height: 3rem;
-      background: #282936;
-      border-radius: 1.625rem;
-    }
-    button.learn-more .circle .icon {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      background: #fff;
-    }
-    button.learn-more .circle .icon.arrow {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      left: 0.625rem;
-      width: 1.125rem;
-      height: 0.125rem;
-      background: none;
-    }
-    button.learn-more .circle .icon.arrow::before {
-      position: absolute;
-      content: "";
-      top: -0.25rem;
-      right: 0.0625rem;
-      width: 0.625rem;
-      height: 0.625rem;
-      border-top: 0.125rem solid #fff;
-      border-right: 0.125rem solid #fff;
-      transform: rotate(45deg);
-    }
-    button.learn-more .button-text {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 0.75rem 0;
-      margin: 0 0 0 1.85rem;
-      color: #282936;
-      font-weight: 700;
-      line-height: 1.6;
-      text-align: center;
-      text-transform: uppercase;
-    }
-    button:hover .circle {
-      width: 100%;
-    }
-    button:hover .circle .icon.arrow {
-      background: #fff;
-      transform: translate(1rem, 0);
-    }
-    button:hover .button-text {
-      color: #fff;
-    }
-    .slider {
-      width: 100%;
-      text-align: center;
-      overflow: hidden;
-      position: absolute;
-      bottom: 16px;
-    }
-
-    .slides {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .slide {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-      width: 100px;
-      height: 100px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: #fff;
-      margin-right: 10px;
-      border-radius: 10px;
-      border: none;
-      display: flex;
-    }
-
-    .slide.selected {
-      border: 2px solid #4285f4;
-    }
-
-    .slide:focus {
-      outline: none;
-    }
-
-    .slide:focus-visible {
-      outline: 1px solid #4285f4;
-    }
-
-    :not(:defined) > * {
-      display: none;
-    }
-
-    #ar-button {
-      background-image: url("./ic_view_in_ar_new_googblue_48dp.png");
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      background-position: 12px 50%;
-      background-color: #fff;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      bottom: 132px;
-      padding: 0px 16px 0px 40px;
-      font-family: Roboto Regular, Helvetica Neue, sans-serif;
-      font-size: 14px;
-      color:#4285f4;
-      height: 36px;
-      line-height: 36px;
-      border-radius: 18px;
-      border: 1px solid #DADCE0;
-    }
-
-    #ar-button:active {
-      background-color: #E8EAED;
-    }
-
-    #ar-button:focus {
-      outline: none;
-    }
-
-    #ar-button:focus-visible {
-      outline: 1px solid #4285f4;
-    }
-
-  </style>
-
   <script type="module" src="./model-viewer.min.js"></script>
   <script nomodule src="./model-viewer-legacy.js"></script>
-  <script type="module">
-    const modelViewer = document.querySelector("model-viewer");
-
-    window.switchSrc = (element, name) => {
-      const base = "./assets/" + name;
-      modelViewer.src = base + '.glb';
-      modelViewer.poster = base + '.png';
-      const slides = document.querySelectorAll(".slide");
-      slides.forEach((element) => {element.classList.remove("selected");});
-      element.classList.add("selected");
-    };
-
-    document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
-      // Keep slider interactions from affecting the XR scene.
-      ev.preventDefault();
-    });
-  </script>
 </head>
 <body>
-  <h2>Wat is Lorem Ipsum?</h2>
-  Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
+<div>HIII</div>
+<model-viewer src="./assets/concrete_seat_anthracite.glb" poster="./assets/concrete_seat_anthracite.png" shadow-intensity="1" ar ar-modes="webxr" style="width: 100%; max-width: 500px; height: 100%; max-height: 700px; margin: 0" camera-controls alt="A 3D model carousel">
 
-  <h2>Waarom gebruiken we het?</h2>
-  Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
+  <button slot="ar-button" id="ar-button">
+    View in your space
+  </button>
 
-  <h2>Wat is Lorem Ipsum?</h2>
-  Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
-
-  <h2>Waarom gebruiken we het?</h2>
-  Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
-
-  <h2 id="ar-model">AR model</h2>
-
-  <div>
-    <div style="display: none;" id="qr-desktop">
-      <p>Je kunt het AR model hieronder bekijken in je browser. <br/>
-        Scan de QR code met je telefoon om het product in je eigen omgeving te bekijken.
-      </p>
-      <img src="./qr.png" style="height: 200px;" />
-    </div>
-
-    <model-viewer src="./assets/concrete_seat_anthracite.glb" ar ar-modes="scene-viewer quick-look"
-                  style="width: 100%; max-width: 500px; height: 100%; max-height: 700px;"
-                  ar-scale="auto" ar-placement="floor" camera-controls alt="A 3D model of an chair"
-                  ios-src="./assets/concrete_seat_anthracite.usdz">
-      <a href="https://www.fatboy.com/nl-nl/concrete-seat" style="display: flex; justify-content: center; margin-top: 1em;">
-        <button class="learn-more">
-          <span class="circle" aria-hidden="true">
-            <span class="icon arrow"></span>
-          </span>
-          <span class="button-text">Meer informatie</span>
-        </button>
-      </a>
-      <button slot="ar-button" id="ar-button">
-        View in your space
-      </button>
-      <div class="slider">
-        <div class="slides">
-          <button class="slide selected" onClick="switchSrc(this, 'concrete_seat_anthracite')" style="background-image: url('./assets/concrete_seat_anthracite.png')"></button>
-          <button class="slide" onClick="switchSrc(this, 'concrete_seat_dijon_yellow')" style="background-image: url('./assets/concrete_seat_dijon_yellow.png')"></button>
-          <button class="slide" onClick="switchSrc(this, 'concrete_seat_light_grey')" style="background-image: url('./assets/concrete_seat_light_grey.png')"></button>
-        </div>
-      </div>
-    </model-viewer>
+  <div id="ar-prompt">
+    <img src="./assets/hand.png">
   </div>
 
-  <h2>Waarom gebruiken we het?</h2>
-  Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).
+  <div class="slider">
+    <div class="slides">
+      <button class="slide selected" onclick="switchSrc(this, 'concrete_seat_anthracite')" style="background-image: url('./assets/concrete_seat_anthracite.png');">
 
-  <!-- Hiermee kan het AR model in Quick look getriggered worden, zonder user interactie. -->
-  <a style="display: none" rel="ar" id="ios-ar" href="assets/concrete_seat_anthracite.usdz">
-    <img src="" />
-  </a>
+      </button><button class="slide" onclick="switchSrc(this, 'concrete_seat_dijon_yellow')" style="background-image: url('./assets/concrete_seat_dijon_yellow.png');">
 
-  <script>
-    function getMobileOS() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    </button><button class="slide" onclick="switchSrc(this, 'concrete_seat_light_grey')" style="background-image: url('./assets/concrete_seat_light_grey.png');">
+    </button></div>
+  </div>
+</model-viewer>
 
-      if (/android/i.test(userAgent)) {
-        return "Android";
-      }
+<script type="module">
+  const modelViewer = document.querySelector("model-viewer");
 
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-      }
+  window.switchSrc = (element, name) => {
+    const base = "./assets/" + name;
+    modelViewer.src = base + '.glb';
+    modelViewer.poster = base + '.png';
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((element) => {element.classList.remove("selected");});
+    element.classList.add("selected");
+  };
 
-      return "unknown";
-    }
+  document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+    // Keep slider interactions from affecting the XR scene.
+    ev.preventDefault();
+  });
+</script>
 
-    const os = getMobileOS();
-    const selfUrl = new URL(window.location.href);
+<style>
+  /* This keeps child nodes hidden while the element loads */
+  :not(:defined) > * {
+    display: none;
+  }
 
-    // Using query params as using location.hash somehow interferes with model-viewer loading
-    // ¯\_(ツ)_/¯
-    const params = new URL(selfUrl).searchParams;
-    const triggerArModel = params.get("open-ar-model") !== null;
-    const arOpenFailed = params.get("ar-open-failed") !== null;
+  model-viewer {
+    background-color: #eee;
+    overflow-x: hidden;
+    --poster-color: #eee;
+  }
 
-    if(os === "unknown") { //desktop
-      document.getElementById("qr-desktop").style.display = 'block';
-    }
+  #ar-button {
+    background-image: url(./assets/ic_view_in_ar_new_googblue_48dp.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 132px;
+    padding: 0px 16px 0px 40px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color:#4285f4;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+  }
 
-    if(triggerArModel) {
-      switch(os) {
-        case "Android":
-          const modelUrl = new URL('./assets/concrete_seat_anthracite.glb', selfUrl);
-          const fallbackUrl = new URL(selfUrl);
-          fallbackUrl.search = '?ar-open-failed';
+  #ar-button:active {
+    background-color: #E8EAED;
+  }
 
-          window.location.href = "intent://arvr.google.com/scene-viewer/1.0?file=" + modelUrl + "&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=" + fallbackUrl + ";end;";
-          break;
-        case "iOS":
-          document.getElementById('ios-ar').click();
-          break;
-      }
-    }
+  #ar-button:focus {
+    outline: none;
+  }
 
-    if(arOpenFailed) {
-      document.getElementById('ar-model').scrollIntoView();
-    }
-  </script>
+  #ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+  @keyframes circle {
+    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+
+  @keyframes elongate {
+    from { transform: translateX(100px); }
+    to   { transform: translateX(-100px); }
+  }
+
+  model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+  }
+
+  model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+  }
+
+  model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+  }
+
+  .slider {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 16px;
+  }
+
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+  }
+
+  .slide.selected {
+    border: 2px solid #4285f4;
+  }
+
+  .slide:focus {
+    outline: none;
+  }
+
+  .slide:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+</style>
 </body>
 </html>
+
