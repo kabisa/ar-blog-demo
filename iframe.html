@@ -46,6 +46,12 @@
     // Keep slider interactions from affecting the XR scene.
     ev.preventDefault();
   });
+
+  if (/instagram|FBAN|FBAV|LinkedInApp/i.test(navigator.userAgent)) {
+    const arButton = document.getElementById('ar-button');
+
+    arButton.style.display = 'none';
+  }
 </script>
 
 <style>
